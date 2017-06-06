@@ -4,7 +4,6 @@ import Highcharts from 'highcharts';
 class Chart extends Component {
 
   componentWillReceiveProps(nextProps) {
-    console.log('receive props ', nextProps);
     this.chart = new Highcharts[nextProps.type || "Chart"](
       this.refs.chart,
       nextProps.options
@@ -17,7 +16,6 @@ class Chart extends Component {
   }
 
   render() {
-    console.log('render ', this.props.options);
     return (
       <div ref="chart"/>
     )

@@ -11,12 +11,15 @@ export function getStocks(req, res) {
 }
 
 export function addStock(req, res) {
-  // if (!req.body.stock.code) {
-  //   res.status(403).end();
-  // }
+
+  console.log("req.body! ", req.body);
+
+  if (!req.body.code) {
+    res.status(403).end();
+  }
 
   const newStock = new Stock({
-    code:'OPEC',
+    code: req.body.code,
     cuid: cuid()
   });
 

@@ -11340,7 +11340,7 @@ var Main = function (_Component) {
       var loading = this.state.loading ? _react2.default.createElement(
         'p',
         null,
-        'loading'
+        'loading stock'
       ) : _react2.default.createElement(
         'p',
         null,

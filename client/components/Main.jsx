@@ -109,7 +109,7 @@ class Main extends Component {
     };
 
 
-    let loading = (this.state.loading) ? <p>loading</p> : <p>finish loading</p>;
+    let loading = (this.state.loading) ? <p>loading stock</p> : <p>finish loading</p>;
 
     return (
       <div className="App">

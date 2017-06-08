@@ -7,19 +7,21 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataArray: [
-        {
-          data: [],
-          name: ''
-        }
-      ]
+      dataArray: [],
+      loading: true
     };
     this.handleAddStock = this.handleAddStock.bind(this);
+    //this.updateStateWithData = this.updateStateWithData.bind(this);
   }
 
-  componentWillMount() {
+  updateStateWithData() {
     let that = this;
     let url = 'api/stocks';
+
+    this.setState({
+      dataArray: [],
+      loading: true
+    });
 
     fetch(url)
       .then(function (response) {
@@ -28,12 +30,19 @@ class Main extends Component {
         }
         return response.json();
       })
-      .then(function (data) {
-        let stocks = data.stocks.map((elem) => {
+      .then(function (dat) {
+        let numOfCompletedFetch = 0;
+        let stocks = dat.stocks.map(function (elem) {
+
+            var myInit = {mode: 'cors',
+            header: {
+                'Access-Control-Allow-Origin':'*',
+                'Content-Type': 'multipart/form-data'
+            }};
 
             let url = `https://www.quandl.com/api/v3/datasets/WIKI/${elem.code}/data.json?api_key=ybCTqaxu8RR7W5nCsdf-`
 
-            fetch(url)
+            fetch(url, myInit)
               .then(function (response) {
                 if (response.status >= 400) {
                   throw new Error("Bad response from server");
@@ -41,11 +50,14 @@ class Main extends Component {
                 return response.json();
               })
               .then(function (data) {
-                let dataset = data.dataset_data.data.map(elem => elem['1']);
+                let dataset = data.dataset_data.data.map(el => el['1']);
                 let dataArray = that.state.dataArray;
+                console.log(dataArray);
                 dataArray.push({data: dataset, name: elem.code});
-                that.setState({dataArray});
-                console.log(that.state.dataArray);
+                numOfCompletedFetch++;
+                if (numOfCompletedFetch === dat.stocks.length) {
+                  that.setState({dataArray});
+                }
               });
 
             return elem.code
@@ -53,10 +65,17 @@ class Main extends Component {
         );
         console.log(stocks);
       });
+  }
 
+
+  componentDidMount() {
+    console.log('Did mount');
+    this.updateStateWithData();
   }
 
   handleAddStock(stockId) {
+
+    let that = this;
 
     fetch("/api/stocks/",
       {
@@ -68,25 +87,20 @@ class Main extends Component {
         body: JSON.stringify({code: stockId})
       })
       .then(function (res) {
-        console.log(res)
+        console.log('completed');
+        that.updateStateWithData();
       })
       .catch(function (res) {
         console.log(res)
       })
+
   }
 
   render() {
     const options = {
-      title: {
-        text: 'Stock charts'
-      },
-      xAxis: {
-        categories: ['Apples', 'Bananas', 'Oranges']
-      },
-      yAxis: {
-        title: {
-          text: 'Fruit eaten'
-        }
+
+      rangeSelector: {
+        selected: 1
       },
       chart: {
         type: 'line'
@@ -95,11 +109,14 @@ class Main extends Component {
     };
 
 
+    let loading = (this.state.loading) ? <p>loading</p> : <p>finish loading</p>;
+
     return (
       <div className="App">
         <div className="App-header">
           <h2>Welcome to React</h2>
         </div>
+        {loading}
         <Chart options={options}/>
         <AddStock handleAddStock={this.handleAddStock}/>
       </div>

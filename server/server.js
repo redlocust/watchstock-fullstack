@@ -4,6 +4,8 @@ import path from 'path';
 import bodyParser from 'body-parser';
 const app = express();
 const port = process.env.PORT || 3000;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json()); // <--- Here
@@ -18,6 +20,12 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-app.listen(3000, () => {console.log(`listen on ${port}  port`)});
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+server.listen(3000, () => {console.log(`listen on ${port}  port`)});
 
 export default app;

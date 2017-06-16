@@ -3,6 +3,9 @@ import Chart from './Chart.jsx';
 import AddStock from './AddStock.jsx';
 import axios from 'axios';
 
+let socket = io();
+
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -70,6 +73,7 @@ class Main extends Component {
 
   componentDidMount() {
     console.log('Did mount');
+    //let socket = io();
     this.updateStateWithData();
   }
 

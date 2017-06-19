@@ -11302,9 +11302,12 @@ var Main = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('Did mount');
-      //let socket = io();
+      var that = this;
       this.updateStateWithData();
+      socket.on('UPDATE', function (msg) {
+        console.log('update');
+        that.updateStateWithData();
+      });
     }
   }, {
     key: 'handleAddStock',
@@ -11325,6 +11328,8 @@ var Main = function (_Component) {
       }).catch(function (res) {
         console.log(res);
       });
+
+      socket.emit('ADD_STOCK', stockId);
     }
   }, {
     key: 'render',

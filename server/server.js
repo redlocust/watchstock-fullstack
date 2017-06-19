@@ -8,12 +8,11 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(bodyParser.json()); // <--- Here
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/api', stocks);
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
@@ -24,6 +23,13 @@ io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){
     console.log('user disconnected');
+  });
+});
+
+io.on('connection', function(socket){
+  socket.on('ADD_STOCK', function(stockId){
+    console.log('ADD_STOCK ', stockId);
+    io.emit('UPDATE', stockId);
   });
 });
 server.listen(3000, () => {console.log(`listen on ${port}  port`)});

@@ -5,7 +5,6 @@ import axios from 'axios';
 
 let socket = io();
 
-
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -72,9 +71,12 @@ class Main extends Component {
 
 
   componentDidMount() {
-    console.log('Did mount');
-    //let socket = io();
+    let that = this;
     this.updateStateWithData();
+    socket.on('UPDATE', function (msg) {
+      console.log('update');
+      that.updateStateWithData();
+    })
   }
 
   handleAddStock(stockId) {
@@ -96,7 +98,9 @@ class Main extends Component {
       })
       .catch(function (res) {
         console.log(res)
-      })
+      });
+
+    socket.emit('ADD_STOCK', stockId);
 
   }
 

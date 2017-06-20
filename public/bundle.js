@@ -11217,6 +11217,10 @@ var _AddStock = __webpack_require__(107);
 
 var _AddStock2 = _interopRequireDefault(_AddStock);
 
+var _StocksList = __webpack_require__(213);
+
+var _StocksList2 = _interopRequireDefault(_StocksList);
+
 var _axios = __webpack_require__(89);
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -11324,7 +11328,7 @@ var Main = function (_Component) {
         body: JSON.stringify({ code: stockId })
       }).then(function (res) {
         console.log('completed');
-        that.updateStateWithData();
+        //that.updateStateWithData();
       }).catch(function (res) {
         console.log(res);
       });
@@ -11369,7 +11373,8 @@ var Main = function (_Component) {
         ),
         loading,
         _react2.default.createElement(_Chart2.default, { options: options }),
-        _react2.default.createElement(_AddStock2.default, { handleAddStock: this.handleAddStock })
+        _react2.default.createElement(_AddStock2.default, { handleAddStock: this.handleAddStock }),
+        _react2.default.createElement(_StocksList2.default, null)
       );
     }
   }]);
@@ -24434,6 +24439,54 @@ module.exports = traverseAllChildren;
 
 module.exports = __webpack_require__(88);
 
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(33);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StocksList = function (_Component) {
+  _inherits(StocksList, _Component);
+
+  function StocksList(props) {
+    _classCallCheck(this, StocksList);
+
+    return _possibleConstructorReturn(this, (StocksList.__proto__ || Object.getPrototypeOf(StocksList)).call(this, props));
+  }
+
+  _createClass(StocksList, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'p',
+          null,
+          'List of stocks'
+        )
+      );
+    }
+  }]);
+
+  return StocksList;
+}(_react.Component);
 
 /***/ })
 /******/ ]);

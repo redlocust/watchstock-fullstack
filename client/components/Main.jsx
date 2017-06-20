@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Chart from './Chart.jsx';
 import AddStock from './AddStock.jsx';
+import StocksList from './StocksList';
 import axios from 'axios';
 
 let socket = io();
@@ -94,7 +95,7 @@ class Main extends Component {
       })
       .then(function (res) {
         console.log('completed');
-        that.updateStateWithData();
+        //that.updateStateWithData();
       })
       .catch(function (res) {
         console.log(res)
@@ -127,6 +128,7 @@ class Main extends Component {
         {loading}
         <Chart options={options}/>
         <AddStock handleAddStock={this.handleAddStock}/>
+        <StocksList />
       </div>
     );
   }

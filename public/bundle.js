@@ -11273,11 +11273,13 @@ var Main = function (_Component) {
         var numOfCompletedFetch = 0;
         var stocks = dat.stocks.map(function (elem) {
 
-          var myInit = { mode: 'cors',
+          var myInit = {
+            mode: 'cors',
             header: {
               'Access-Control-Allow-Origin': '*',
               'Content-Type': 'multipart/form-data'
-            } };
+            }
+          };
 
           var url = 'https://www.quandl.com/api/v3/datasets/WIKI/' + elem.code + '/data.json?api_key=ybCTqaxu8RR7W5nCsdf-';
 
@@ -11317,7 +11319,6 @@ var Main = function (_Component) {
   }, {
     key: 'handleAddStock',
     value: function handleAddStock(stockId) {
-
       var that = this;
 
       fetch("/api/stocks/", {
@@ -11334,6 +11335,11 @@ var Main = function (_Component) {
       });
 
       socket.emit('ADD_STOCK', stockId);
+    }
+  }, {
+    key: 'handleDeleteStock',
+    value: function handleDeleteStock(stockId) {
+      ////// temporary
     }
   }, {
     key: 'render',
@@ -11415,12 +11421,24 @@ var StocksList = function (_Component) {
   function StocksList(props) {
     _classCallCheck(this, StocksList);
 
-    return _possibleConstructorReturn(this, (StocksList.__proto__ || Object.getPrototypeOf(StocksList)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (StocksList.__proto__ || Object.getPrototypeOf(StocksList)).call(this, props));
+
+    _this.onDeleteClick = _this.onDeleteClick.bind(_this);
+    return _this;
   }
 
   _createClass(StocksList, [{
+    key: 'onDeleteClick',
+    value: function onDeleteClick(e) {
+      var stoclId = 'FB';
+      e.preventDefault();
+      alert('delete');
+      this.props.handleDeleteStock(stockId);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
 
       var stocksList = this.props.dataArray.map(function (stock) {
         return _react2.default.createElement(
@@ -11429,7 +11447,7 @@ var StocksList = function (_Component) {
           stock.name,
           _react2.default.createElement(
             'button',
-            { className: 'stockList_button-delete' },
+            { className: 'stockList_button-delete', onClick: _this2.onDeleteClick },
             'x'
           )
         );

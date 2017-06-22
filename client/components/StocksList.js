@@ -2,8 +2,18 @@ import React, {Component} from 'react';
 
 class StocksList extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
   }
+
+
+  onDeleteClick(e) {
+    let stoclId = 'FB';
+    e.preventDefault();
+    alert('delete');
+    this.props.handleDeleteStock(stockId);
+  }
+
 
   render() {
 
@@ -11,7 +21,7 @@ class StocksList extends Component {
   let stocksList = this.props.dataArray.map((stock) => {
       return <div className="stockList" key={stock.name}>
         {stock.name}
-        <button className='stockList_button-delete'>x</button>
+        <button className='stockList_button-delete' onClick={this.onDeleteClick}>x</button>
         </div>
   });
 

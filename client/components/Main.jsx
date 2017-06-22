@@ -37,11 +37,13 @@ class Main extends Component {
         let numOfCompletedFetch = 0;
         let stocks = dat.stocks.map(function (elem) {
 
-            var myInit = {mode: 'cors',
-            header: {
-                'Access-Control-Allow-Origin':'*',
+            var myInit = {
+              mode: 'cors',
+              header: {
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'multipart/form-data'
-            }};
+              }
+            };
 
             let url = `https://www.quandl.com/api/v3/datasets/WIKI/${elem.code}/data.json?api_key=ybCTqaxu8RR7W5nCsdf-`
 
@@ -81,7 +83,6 @@ class Main extends Component {
   }
 
   handleAddStock(stockId) {
-
     let that = this;
 
     fetch("/api/stocks/",
@@ -102,6 +103,10 @@ class Main extends Component {
 
     socket.emit('ADD_STOCK', stockId);
 
+  }
+
+  handleDeleteStock(stockId) {
+    ////// temporary
   }
 
   render() {

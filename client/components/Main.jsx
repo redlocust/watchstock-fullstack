@@ -95,7 +95,6 @@ class Main extends Component {
       })
       .then(function (res) {
         console.log('completed');
-        //that.updateStateWithData();
       })
       .catch(function (res) {
         console.log(res)
@@ -128,7 +127,7 @@ class Main extends Component {
         {loading}
         <Chart options={options}/>
         <AddStock handleAddStock={this.handleAddStock}/>
-        <StocksList />
+        <StocksList dataArray={this.state.dataArray}/>
       </div>
     );
   }

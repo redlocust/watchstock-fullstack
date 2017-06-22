@@ -6,10 +6,22 @@ class StocksList extends Component {
   }
 
   render() {
+
+
+  let stocksList = this.props.dataArray.map((stock) => {
+      return <div className="stockList" key={stock.name}>
+        {stock.name}
+        <button className='stockList_button-delete'>x</button>
+        </div>
+  });
+
+
     return (
       <div>
-        <p>List of stocks</p>
+          {stocksList}
       </div>
     )
   }
 }
+
+export default StocksList;

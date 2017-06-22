@@ -8,7 +8,8 @@ class AddStock extends Component {
 
   onAddStock(e) {
     e.preventDefault();
-    this.props.handleAddStock(this.textInput.value)
+    this.props.handleAddStock(this.textInput.value);
+    this.textInput.value = '';
   }
 
   render() {

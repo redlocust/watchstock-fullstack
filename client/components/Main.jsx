@@ -14,7 +14,7 @@ class Main extends Component {
       loading: true
     };
     this.handleAddStock = this.handleAddStock.bind(this);
-    //this.updateStateWithData = this.updateStateWithData.bind(this);
+    this.handleDeleteStock = this.handleDeleteStock.bind(this);
   }
 
   updateStateWithData() {
@@ -106,7 +106,8 @@ class Main extends Component {
   }
 
   handleDeleteStock(stockId) {
-    ////// temporary
+    console.log(stockId);
+    console.log(this.state.dataArray.findIndex((elem,index) => elem.name === stockId));
   }
 
   render() {
@@ -132,7 +133,7 @@ class Main extends Component {
         {loading}
         <Chart options={options}/>
         <AddStock handleAddStock={this.handleAddStock}/>
-        <StocksList dataArray={this.state.dataArray}/>
+        <StocksList dataArray={this.state.dataArray} handleDeleteStock={this.handleDeleteStock}/>
       </div>
     );
   }

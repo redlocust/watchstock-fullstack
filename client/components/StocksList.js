@@ -6,14 +6,11 @@ class StocksList extends Component {
     this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
-
   onDeleteClick(e) {
-    let stoclId = 'FB';
+    let stockId = 'FB';
     e.preventDefault();
-    alert('delete');
     this.props.handleDeleteStock(stockId);
   }
-
 
   render() {
 

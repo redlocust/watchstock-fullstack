@@ -11249,7 +11249,7 @@ var Main = function (_Component) {
       loading: true
     };
     _this.handleAddStock = _this.handleAddStock.bind(_this);
-    //this.updateStateWithData = this.updateStateWithData.bind(this);
+    _this.handleDeleteStock = _this.handleDeleteStock.bind(_this);
     return _this;
   }
 
@@ -11339,7 +11339,10 @@ var Main = function (_Component) {
   }, {
     key: 'handleDeleteStock',
     value: function handleDeleteStock(stockId) {
-      ////// temporary
+      console.log(stockId);
+      console.log(this.state.dataArray.findIndex(function (elem, index) {
+        return elem.name === stockId;
+      }));
     }
   }, {
     key: 'render',
@@ -11380,7 +11383,7 @@ var Main = function (_Component) {
         loading,
         _react2.default.createElement(_Chart2.default, { options: options }),
         _react2.default.createElement(_AddStock2.default, { handleAddStock: this.handleAddStock }),
-        _react2.default.createElement(_StocksList2.default, { dataArray: this.state.dataArray })
+        _react2.default.createElement(_StocksList2.default, { dataArray: this.state.dataArray, handleDeleteStock: this.handleDeleteStock })
       );
     }
   }]);
@@ -11430,9 +11433,8 @@ var StocksList = function (_Component) {
   _createClass(StocksList, [{
     key: 'onDeleteClick',
     value: function onDeleteClick(e) {
-      var stoclId = 'FB';
+      var stockId = 'FB';
       e.preventDefault();
-      alert('delete');
       this.props.handleDeleteStock(stockId);
     }
   }, {

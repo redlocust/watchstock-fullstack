@@ -11343,6 +11343,25 @@ var Main = function (_Component) {
       console.log(this.state.dataArray.findIndex(function (elem, index) {
         return elem.name === stockId;
       }));
+
+      var that = this;
+
+      var url = '/api/stocks/:' + stockId;
+
+      fetch(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "DELETE"
+      }).then(function () {
+        console.log('delete stock');
+      }).catch(function (res) {
+        console.log('error delete stock');
+        console.log(res);
+      });
+
+      socket.emit('DELETE_STOCK', stockId);
     }
   }, {
     key: 'render',
@@ -11432,8 +11451,7 @@ var StocksList = function (_Component) {
 
   _createClass(StocksList, [{
     key: 'onDeleteClick',
-    value: function onDeleteClick(e) {
-      var stockId = 'FB';
+    value: function onDeleteClick(stockId, e) {
       e.preventDefault();
       this.props.handleDeleteStock(stockId);
     }
@@ -11449,7 +11467,7 @@ var StocksList = function (_Component) {
           stock.name,
           _react2.default.createElement(
             'button',
-            { className: 'stockList_button-delete', onClick: _this2.onDeleteClick },
+            { className: 'stockList_button-delete', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
             'x'
           )
         );

@@ -6,26 +6,22 @@ class StocksList extends Component {
     this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
-  onDeleteClick(e) {
-    let stockId = 'FB';
+  onDeleteClick(stockId, e) {
     e.preventDefault();
     this.props.handleDeleteStock(stockId);
   }
 
   render() {
-
-
-  let stocksList = this.props.dataArray.map((stock) => {
+    let stocksList = this.props.dataArray.map((stock) => {
       return <div className="stockList" key={stock.name}>
         {stock.name}
-        <button className='stockList_button-delete' onClick={this.onDeleteClick}>x</button>
-        </div>
-  });
-
+        <button className='stockList_button-delete' onClick={this.onDeleteClick.bind(this, stock.name)}>x</button>
+      </div>
+    });
 
     return (
       <div>
-          {stocksList}
+        {stocksList}
       </div>
     )
   }

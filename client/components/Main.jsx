@@ -107,7 +107,27 @@ class Main extends Component {
 
   handleDeleteStock(stockId) {
     console.log(stockId);
-    console.log(this.state.dataArray.findIndex((elem,index) => elem.name === stockId));
+    console.log(this.state.dataArray.findIndex((elem, index) => elem.name === stockId));
+
+    let that = this;
+
+    let url = `/api/stocks/:${stockId}`;
+
+    fetch( url,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "DELETE",
+      })
+      .then(() => {console.log('delete stock')})
+      .catch(function (res) {
+        console.log('error delete stock');
+        console.log(res);
+      });
+
+      socket.emit('DELETE_STOCK', stockId);
   }
 
   render() {

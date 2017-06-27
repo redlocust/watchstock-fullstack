@@ -32,6 +32,15 @@ io.on('connection', function(socket){
     io.emit('UPDATE', stockId);
   });
 });
+
+
+io.on('connection', function(socket){
+  socket.on('DELETE_STOCK', function(stockId){
+    console.log('DELETE_STOCK ', stockId);
+    io.emit('UPDATE', stockId);
+  });
+});
+
 server.listen(3000, () => {console.log(`listen on ${port}  port`)});
 
 export default app;

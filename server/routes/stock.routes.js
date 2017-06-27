@@ -7,12 +7,10 @@ router.route('/').get(function (req, res) {
 });
 
 
-
-
 router.route('/stocks').get(StockController.getStocks);
 //router.route('/stocks/:stockcode').get(StockController.getOneStock);
-//router.route('/stocks').get(StockController.addStock);
 router.route('/stocks').post(StockController.addStock);
+router.route('/stocks/:stockcode').delete(StockController.deleteStock);
 
 
 export default router;

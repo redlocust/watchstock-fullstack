@@ -30,3 +30,10 @@ export function addStock(req, res) {
     res.json({post: saved});
   });
 }
+
+export function deleteStock(req, res) {
+  console.log("delete id: " + req.params.stockcode);
+  if (!req.params.stockcode) {
+    res.status(403).end();
+  }
+}

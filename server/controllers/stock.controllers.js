@@ -32,8 +32,25 @@ export function addStock(req, res) {
 }
 
 export function deleteStock(req, res) {
-  console.log("delete id: " + req.params.stockcode);
-  if (!req.params.stockcode) {
+
+  let stockCode = req.params.stockcode;
+
+  console.dir(req.params);
+
+  console.log(`delete id: ${stockCode}`);
+  console.log("403 ",stockCode);
+
+  if (!stockCode) {
     res.status(403).end();
   }
+
+
+  console.log(stockCode);
+
+  Stock.findOneAndRemove({code: stockCode})
+    .exec(function(err, stock) {
+      console.log('err ', err);
+      console.log('stock ', stock);
+    });
+
 }

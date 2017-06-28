@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Chart from './Chart.jsx';
 import AddStock from './AddStock.jsx';
 import StocksList from './StocksList';
-import axios from 'axios';
 
 let socket = io();
 
@@ -111,7 +110,7 @@ class Main extends Component {
 
     let that = this;
 
-    let url = `/api/stocks/:${stockId}`;
+    let url = `/api/stocks/${stockId}`;
 
     fetch( url,
       {

@@ -12,6 +12,7 @@ var querySchema = mongoose.Schema({
   cuid: String,
 });
 
+
 var Stock = mongoose.model('Stock', querySchema);
 
 export default Stock;

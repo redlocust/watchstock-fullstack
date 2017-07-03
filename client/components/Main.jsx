@@ -112,7 +112,7 @@ class Main extends Component {
 
     let url = `/api/stocks/${stockId}`;
 
-    fetch( url,
+    fetch(url,
       {
         headers: {
           'Accept': 'application/json',
@@ -120,13 +120,15 @@ class Main extends Component {
         },
         method: "DELETE",
       })
-      .then(() => {console.log('delete stock')})
+      .then(() => {
+        console.log('delete stock')
+      })
       .catch(function (res) {
         console.log('error delete stock');
         console.log(res);
       });
 
-      socket.emit('DELETE_STOCK', stockId);
+    socket.emit('DELETE_STOCK', stockId);
   }
 
   render() {
@@ -145,14 +147,16 @@ class Main extends Component {
     let loading = (this.state.loading) ? <p>loading stock</p> : <p>finish loading</p>;
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
+      <div className="App row">
+        <div className="col-md-6 col-md-offset-3">
+          <div className="App-header">
+            <h2>Welcome to React</h2>
+          </div>
+          {loading}
+          <Chart options={options}/>
+          <AddStock handleAddStock={this.handleAddStock}/>
+          <StocksList dataArray={this.state.dataArray} handleDeleteStock={this.handleDeleteStock}/>
         </div>
-        {loading}
-        <Chart options={options}/>
-        <AddStock handleAddStock={this.handleAddStock}/>
-        <StocksList dataArray={this.state.dataArray} handleDeleteStock={this.handleDeleteStock}/>
       </div>
     );
   }

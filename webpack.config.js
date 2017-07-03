@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+let path = require('path');
+let webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -26,7 +26,10 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
-      }
+      },
+      { test: /\.(woff2?|svg)$/, loader: 'url-loader?limit=10000' },
+      { test: /\.(ttf|eot)$/, loader: 'file-loader' },
+      { test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports-loader?jQuery=jquery' },
     ]
   },
 

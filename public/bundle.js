@@ -19896,6 +19896,10 @@ var _highstock = __webpack_require__(108);
 
 var _highstock2 = _interopRequireDefault(_highstock);
 
+var _jquery = __webpack_require__(8);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19914,9 +19918,45 @@ var Chart = function (_Component) {
   }
 
   _createClass(Chart, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+
+      var options = {
+
+        yAxis: {
+          labels: {
+            formatter: function formatter() {
+              return this.value + ' km';
+            }
+          }
+        },
+
+        series: [{
+          data: []
+        }]
+
+      };
+
+      console.log(document.getElementById('chart'));
+      console.log(this.refs.chart);
+
+      this.chart = new _highstock2.default.StockChart(this.refs.chart, options);
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      this.chart = new _highstock2.default.StockChart(this.refs.chart, nextProps.options);
+      //console.log(document.getElementById('chart'));
+      // for (let i = this.chart.series.length-1; i>=0; i--) {
+      //   this.chart.series[i].remove();
+      // }
+      // for (let y = new_serie.length-1; y >= 0; y--) {
+      //   this.chart.addSeries(new_serie[y]);
+      // }
+
+      // this.chart = new Highcharts.StockChart(
+      //   this.refs.chart,
+      //   nextProps.options
+
     }
   }, {
     key: 'componentWillUnmount',

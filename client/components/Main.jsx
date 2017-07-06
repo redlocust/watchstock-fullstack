@@ -22,7 +22,6 @@ class Main extends Component {
 
     this.setState({
       dataArray: [],
-      loading: true
     });
 
     fetch(url)
@@ -132,19 +131,7 @@ class Main extends Component {
   }
 
   render() {
-    const options = {
-
-      rangeSelector: {
-        selected: 1
-      },
-      chart: {
-        type: 'line'
-      },
-      series: this.state.dataArray
-    };
-
-
-    let loading = (this.state.loading) ? <p>loading stock</p> : <p>finish loading</p>;
+    let options = this.state.dataArray;
 
     return (
       <div className="App row">
@@ -152,7 +139,6 @@ class Main extends Component {
           <div className="App-header">
             <h2>Welcome to React</h2>
           </div>
-          {loading}
           <Chart options={options}/>
           <AddStock handleAddStock={this.handleAddStock}/>
           <StocksList dataArray={this.state.dataArray} handleDeleteStock={this.handleDeleteStock}/>

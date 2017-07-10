@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './style.scss';
 
 class StocksList extends Component {
   constructor(props) {
@@ -13,14 +14,14 @@ class StocksList extends Component {
 
   render() {
     let stocksList = this.props.dataArray.map((stock) => {
-      return <div className="stockList" key={stock.name}>
+      return <div className="stockList col-md-3" key={stock.name}>
         {stock.name}
-        <button className='stockList_button-delete' onClick={this.onDeleteClick.bind(this, stock.name)}>x</button>
+        <button className='stockList__button-delete btn btn-primary' onClick={this.onDeleteClick.bind(this, stock.name)}>x</button>
       </div>
     });
 
     return (
-      <div>
+      <div className="row">
         {stocksList}
       </div>
     )

@@ -20223,11 +20223,11 @@ var StocksList = function (_Component) {
       var stocksList = this.props.dataArray.map(function (stock) {
         return _react2.default.createElement(
           'div',
-          { className: 'stockList col-md-3', key: stock.name },
+          { className: 'col-md-3 stocklist', key: stock.name },
           stock.name,
           _react2.default.createElement(
             'button',
-            { className: 'stockList__button-delete btn btn-primary', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
+            { className: 'btn btn-primary stocklist__button-delete ', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
             'x'
           )
         );

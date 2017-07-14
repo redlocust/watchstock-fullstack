@@ -15,8 +15,53 @@ class Chart extends Component {
       },
 
       series: [
-        {data: []}
-      ]
+        {
+          data: []
+        }
+      ],
+
+      xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+          day: '%d %b %Y'    //ex- 01 Jan 2016
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: '$'
+        }
+      },
+
+      rangeSelector: {
+
+        buttons: [{
+          type: 'day',
+          count: 3,
+          text: '3d'
+        }, {
+          type: 'week',
+          count: 1,
+          text: '1w'
+        }, {
+          type: 'month',
+          count: 1,
+          text: '1m'
+        }, {
+          type: 'month',
+          count: 6,
+          text: '6m'
+        }, {
+          type: 'year',
+          count: 1,
+          text: '1y'
+        }, {
+          type: 'all',
+          text: 'All'
+        }],
+        selected: 3
+      },
+
     };
 
     this.chart = new Highcharts.StockChart(
@@ -38,7 +83,7 @@ class Chart extends Component {
 
     if (this.props.options.length > 0) {
 
-      while(this.chart.series.length > 0)
+      while (this.chart.series.length > 0)
         this.chart.series[0].remove(true);
 
       for (let y = this.props.options.length - 1; y >= 0; y--) {

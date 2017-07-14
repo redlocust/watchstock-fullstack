@@ -19929,7 +19929,52 @@ var Chart = function (_Component) {
           text: 'Stock data from www.quandl.com'
         },
 
-        series: [{ data: [] }]
+        series: [{
+          data: []
+        }],
+
+        xAxis: {
+          type: 'datetime',
+          dateTimeLabelFormats: {
+            day: '%d %b %Y' //ex- 01 Jan 2016
+          }
+        },
+
+        yAxis: {
+          title: {
+            text: '$'
+          }
+        },
+
+        rangeSelector: {
+
+          buttons: [{
+            type: 'day',
+            count: 3,
+            text: '3d'
+          }, {
+            type: 'week',
+            count: 1,
+            text: '1w'
+          }, {
+            type: 'month',
+            count: 1,
+            text: '1m'
+          }, {
+            type: 'month',
+            count: 6,
+            text: '6m'
+          }, {
+            type: 'year',
+            count: 1,
+            text: '1y'
+          }, {
+            type: 'all',
+            text: 'All'
+          }],
+          selected: 3
+        }
+
       };
 
       this.chart = new _highstock2.default.StockChart(this.refs.chart, options);
@@ -20063,16 +20108,21 @@ var Main = function (_Component) {
             }
             return response.json();
           }).then(function (data) {
+            console.log('data', data);
+            console.log('date', Date.parse(data.dataset_data.start_date));
             var dataset = data.dataset_data.data.map(function (el) {
               return el['1'];
             });
             var dataArray = that.state.dataArray;
-            console.log(dataArray);
-            dataArray.push({ data: dataset, name: elem.code });
-            numOfCompletedFetch++;
-            if (numOfCompletedFetch === dat.stocks.length) {
-              that.setState({ dataArray: dataArray });
-            }
+
+            dataArray.push({
+              data: dataset,
+              pointStart: Date.parse(data.dataset_data.start_date),
+              pointInterval: 24 * 3600 * 1000, // one day
+              name: elem.code
+            });
+
+            that.setState({ dataArray: dataArray });
           });
 
           return elem.code;
@@ -20154,7 +20204,7 @@ var Main = function (_Component) {
             _react2.default.createElement(
               'h2',
               null,
-              'Welcome to React'
+              'Stocklist app with socket.io'
             )
           ),
           _react2.default.createElement(_Chart2.default, { options: options }),
@@ -20223,11 +20273,15 @@ var StocksList = function (_Component) {
       var stocksList = this.props.dataArray.map(function (stock) {
         return _react2.default.createElement(
           'div',
-          { className: 'col-md-3 stocklist', key: stock.name },
-          stock.name,
+          { className: 'col-md-3 stocklist__item', key: stock.name },
+          _react2.default.createElement(
+            'p',
+            { className: 'stocklist__name' },
+            stock.name
+          ),
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-primary stocklist__button-delete ', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
+            { className: 'stocklist__button-delete ', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
             'x'
           )
         );
@@ -20235,7 +20289,7 @@ var StocksList = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'row' },
+        { className: 'stocklist row' },
         stocksList
       );
     }

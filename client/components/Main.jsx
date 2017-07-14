@@ -53,14 +53,19 @@ class Main extends Component {
                 return response.json();
               })
               .then(function (data) {
+                console.log('data', data);
+                console.log('date', Date.parse(data.dataset_data.start_date));
                 let dataset = data.dataset_data.data.map(el => el['1']);
                 let dataArray = that.state.dataArray;
-                console.log(dataArray);
-                dataArray.push({data: dataset, name: elem.code});
-                numOfCompletedFetch++;
-                if (numOfCompletedFetch === dat.stocks.length) {
-                  that.setState({dataArray});
-                }
+
+                dataArray.push({
+                  data: dataset,
+                  pointStart: Date.parse(data.dataset_data.start_date),
+                  pointInterval: 24 * 3600 * 1000, // one day
+                  name: elem.code
+                });
+
+                that.setState({dataArray});
               });
 
             return elem.code
@@ -137,7 +142,7 @@ class Main extends Component {
       <div className="App row">
         <div className="col-md-6 col-md-offset-3">
           <div className="App-header">
-            <h2>Welcome to React</h2>
+            <h2>Stocklist app with socket.io</h2>
           </div>
           <Chart options={options}/>
           <AddStock handleAddStock={this.handleAddStock}/>

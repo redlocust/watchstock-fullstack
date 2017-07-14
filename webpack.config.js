@@ -43,7 +43,7 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("style.css"),
+    new ExtractTextPlugin("/public/style.css"),
   ],
 
   devtool: 'source-map'

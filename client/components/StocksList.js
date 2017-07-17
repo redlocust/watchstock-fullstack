@@ -14,9 +14,11 @@ class StocksList extends Component {
 
   render() {
     let stocksList = this.props.dataArray.map((stock) => {
-      return <div className="col-md-3 stocklist__item" key={stock.name}>
-        <p className="stocklist__name">{stock.name}</p>
-        <button className='stocklist__button-delete ' onClick={this.onDeleteClick.bind(this, stock.name)}>x</button>
+      return <div className="col-md-3" key={stock.name}>
+        <div className="stocklist__item">
+          <p className="stocklist__name">{stock.name}</p>
+          <button className='stocklist__button-delete ' onClick={this.onDeleteClick.bind(this, stock.name)}>x</button>
+        </div>
       </div>
     });
 

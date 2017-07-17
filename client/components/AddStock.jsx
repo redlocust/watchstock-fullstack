@@ -16,7 +16,7 @@ class AddStock extends Component {
     return (
       <div>
         <form>
-          <input type="text" ref={(input) => { this.textInput = input; }}/>
+          <input type="text" placeholder="Enter stock code" ref={(input) => { this.textInput = input; }}/>
           <button type="submit"  onClick={this.onAddStock}>Add stock</button>
         </form>
       </div>

@@ -19857,7 +19857,7 @@ var AddStock = function (_Component) {
         _react2.default.createElement(
           'form',
           null,
-          _react2.default.createElement('input', { type: 'text', ref: function ref(input) {
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Enter stock code', ref: function ref(input) {
               _this2.textInput = input;
             } }),
           _react2.default.createElement(
@@ -20200,7 +20200,7 @@ var Main = function (_Component) {
           { className: 'col-md-6 col-md-offset-3' },
           _react2.default.createElement(
             'div',
-            { className: 'App-header' },
+            { className: 'App-header text-center' },
             _react2.default.createElement(
               'h2',
               null,
@@ -20273,16 +20273,20 @@ var StocksList = function (_Component) {
       var stocksList = this.props.dataArray.map(function (stock) {
         return _react2.default.createElement(
           'div',
-          { className: 'col-md-3 stocklist__item', key: stock.name },
+          { className: 'col-md-3', key: stock.name },
           _react2.default.createElement(
-            'p',
-            { className: 'stocklist__name' },
-            stock.name
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'stocklist__button-delete ', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
-            'x'
+            'div',
+            { className: 'stocklist__item' },
+            _react2.default.createElement(
+              'p',
+              { className: 'stocklist__name' },
+              stock.name
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'stocklist__button-delete ', onClick: _this2.onDeleteClick.bind(_this2, stock.name) },
+              'x'
+            )
           )
         );
       });

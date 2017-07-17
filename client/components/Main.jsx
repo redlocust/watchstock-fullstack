@@ -141,7 +141,7 @@ class Main extends Component {
     return (
       <div className="App row">
         <div className="col-md-6 col-md-offset-3">
-          <div className="App-header">
+          <div className="App-header text-center">
             <h2>Stocklist app with socket.io</h2>
           </div>
           <Chart options={options}/>

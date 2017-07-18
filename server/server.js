@@ -41,6 +41,6 @@ io.on('connection', function(socket){
   });
 });
 
-server.listen(port, () => {console.log(`listen on ${port}  port`)});
+server.listen(process.env.PORT || 3000, () => {console.log(`listen on ${port}  port`)});
 
 export default app;
